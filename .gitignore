@@ -1,4 +1,5 @@
 # Node build artifacts
+/.idea
 node_modules
 npm-debug.log
 

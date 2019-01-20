@@ -3,6 +3,7 @@ const path = require('path')
 const PORT = process.env.PORT || 5000
 
 const mongoose = require('mongoose');
+const cors = require('cors');
 const bodyParcer = require('body-parser');
 
 const workers = require('./routes/api/workers');
@@ -21,6 +22,8 @@ mongoose
     .connect(db)
     .then(() => console.log('MongoDB Connected'))
     .catch(err => console.log(err));
+
+app.use(cors());
 
 // Use Routes
 app.use('/api/workers', workers);

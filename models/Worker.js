@@ -9,7 +9,7 @@ const WorkerSchema = new Schema({
     },
     birthday: {
         type: String,
-        required: true
+        required: false
     },
     position: {
         type: String,
