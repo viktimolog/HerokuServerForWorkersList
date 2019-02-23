@@ -42,7 +42,7 @@ router.post('/addWorker', (req, res) => {
                     .catch(err => console.log(err));
             }
         })
-})
+});
 
 // @route   Update api/workers/:id
 // @desc    Update worker
@@ -56,7 +56,7 @@ router.put('/updateWorker/:id', (req, res) => {
     })
         .then(worker => {
             if (worker)
-                return res.json({ success: false })
+                return res.json({ success: false });
             else {
                 Worker.findById(req.params.id)
                     .then(worker => {
@@ -76,7 +76,7 @@ router.put('/updateWorker/:id', (req, res) => {
                     .catch(err => res.status(404).json({ workernotfound: 'No worker found' }));
             }
         })
-})
+});
 
 // @route   DELETE api/workers/:id
 // @desc    Delete worker
@@ -84,7 +84,6 @@ router.put('/updateWorker/:id', (req, res) => {
 router.delete('/delWorker/:id', (req, res) => {
     Worker.findById(req.params.id)
         .then(worker => {
-            // Delete
             worker.remove().then(() => res.json({ success: true }));
         })
         .catch(err => res.status(404).json({ workernotfound: 'No worker found' }));
@@ -106,6 +105,15 @@ router.get('/getWorkers', (req, res) => {
         .sort({ name: 1 })
         .then(workers => res.json(workers))
         .catch(err => res.status(404).json({ noworkersfound: 'No workers found' }));
+});
+
+// @route   GET api/workers/:id
+// @desc    Get worker
+// @access  Public
+router.get('/getWorker/:id', (req, res) => {
+    Worker.findById(req.params.id)
+        .then(worker => res.json(worker))
+        .catch(err => res.status(404).json({ noworkerfound: 'No worker found' }));
 });
 
 module.exports = router;
